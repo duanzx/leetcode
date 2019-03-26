@@ -28,17 +28,18 @@ public class FindMedianSortedArrays004 {
      * [1,3,5],[2,4,6]
      * 4.求两个有序数组的中位数：
      * 忽略时间复杂度的话，可以将两个数组合并到一个大的数组中，然后对新的数组排序（用复杂度少的算法：插入，冒泡），然后根据数组的长度是奇数还是偶数进行选择
-     * 如果是奇数7中位数 7/2+1 = 4 -> arr[3],如果是偶数6,中位数6/2=3, (float)(arr[2] + arr[3])/2
+     * 如果是奇数7中位数 3/2 = 1 -> arr[1],如果是偶数6,中位数6/2=3, (float)(arr[2] + arr[3])/2
      */
     @Test
     public void test() {
-        int[] nums1 = new int[]{1, 3, 5};
-        int[] nums2 = new int[]{2, 4, 6, 8};
-        findMedianSortedArrays1(nums1, nums2);
+        int[] nums1 = new int[]{1, 3};
+        int[] nums2 = new int[]{2};
+        double result = findMedianSortedArrays2(nums1, nums2);
+        System.out.println(result);
     }
 
     /**
-     * 冒泡排序
+     * 选择排序
      */
     public double findMedianSortedArrays1(int[] nums1, int[] nums2) {
         int m = nums1.length;
@@ -62,26 +63,97 @@ public class FindMedianSortedArrays004 {
                 j++;
             }
         }
+        for(int x:arr){
+            System.out.println(x);
+        }
         int mid = (m + n) / 2;
         if ((m + n) % 2 == 1) {
-            return  arr[mid+1];
+            return  arr[mid];
+        }
+        return (double) (arr[mid-1]+arr[mid])/2;
+    }
+
+    /**
+     * 冒泡排序
+     * [5,4,3,2,1]
+     * [4,5,3,2,1]
+     * [4,3,5,2,1]
+     * [4,3,2,5,1]
+     * [4,3,2,1,5]
+     * [3,4,2,1]
+     * [3,2,4,1]
+     * [3,2,1,4]
+     * [2,3,1]
+     * [2,1,3]
+     * [1,2]
+     */
+    public double findMedianSortedArrays2(int[] nums1, int[] nums2) {
+        int m = nums1.length;
+        int n = nums2.length;
+        int[] arr = new int[m + n];
+        for (int i = 0; i < m + n; i++) {
+            if (i < m) {//0 -> m-1
+                arr[i] = nums1[i];
+                continue;
+            }
+            arr[i] = nums2[i - m];//m-1 -> m+n-1
+        }
+        for(int i = 0;i<arr.length-1;i++){
+            for(int j = 0;j<arr.length-i-1;j++){
+                if(arr[j] > arr[j+1]){
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
+        int mid = (m + n) / 2;
+        if ((m + n) % 2 == 1) {
+            return  arr[mid];
         }
         return (double) (arr[mid-1]+arr[mid])/2;
     }
 
     /**
      * 插入排序
-     */
-    public double findMedianSortedArrays2(int[] nums1, int[] nums2) {
-        return 0.0;
-    }
-
-    /**
-     * 题解分析
+     * [5,4,3,2,1]
+     * 5
+     * 45
+     * 345
+     * 2345
+     * 12345
      */
     public double findMedianSortedArrays3(int[] nums1, int[] nums2) {
-        return 0.0;
+        int m = nums1.length;
+        int n = nums2.length;
+        int[] arr = new int[m + n];
+        for (int i = 0; i < m + n; i++) {
+            if (i < m) {//0 -> m-1
+                arr[i] = nums1[i];
+                continue;
+            }
+            arr[i] = nums2[i - m];//m-1 -> m+n-1
+        }
+        for(int i = 0;i<arr.length-1;i++){
+            for(int j = 0;j<arr.length-i-1;j++){
+                if(arr[j] > arr[j+1]){
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
+        for(int x:arr){
+            System.out.println(x);
+        }
+        int mid = (m + n) / 2;
+        if ((m + n) % 2 == 1) {
+            return  arr[mid];
+        }
+        return (double) (arr[mid-1]+arr[mid])/2;
     }
-
+    /**
+     * 题解分析
+     * */
 
 }
