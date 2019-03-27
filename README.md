@@ -12,8 +12,8 @@
 | 4   | [寻找两个有序数组的中位数][004]                  
 
 [duanzx]: https://github.com/duanzx/leetcode
-[001]: https://github.com/duanzx/leetcode/cn/duanzx/leetcode/note/_001/README.md
-[002]: https://github.com/duanzx/leetcode/cn/duanzx/leetcode/note/_002/README.md
-[003]: https://github.com/duanzx/leetcode/cn/duanzx/leetcode/note/_003/README.md
-[004]: https://github.com/duanzx/leetcode/cn/duanzx/leetcode/note/_004/README.md
+[001]: https://github.com/duanzx/leetcode/cn/duanzx/leetcode/note/001/README.md
+[002]: https://github.com/duanzx/leetcode/cn/duanzx/leetcode/note/002/README.md
+[003]: https://github.com/duanzx/leetcode/cn/duanzx/leetcode/note/003/README.md
+[004]: https://github.com/duanzx/leetcode/cn/duanzx/leetcode/note/004/README.md
 
