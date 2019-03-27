@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TwoSum001 {
+public class TwoSum {
 
     private int[] arr = new int[]{2, 7, 11, 15};
 

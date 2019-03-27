@@ -3,7 +3,7 @@ package cn.duanzx.leetcode._002;
 
 import org.junit.jupiter.api.Test;
 
-public class AddTwoNumbers002 {
+public class AddTwoNumbers {
     /**
      * 给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
      * 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
@@ -88,5 +88,12 @@ public class AddTwoNumbers002 {
             tmp = tmp.next;
         }
         return stringBuffer.toString();
+    }
+
+    public ListNode addTwoNumbers1(ListNode l1, ListNode l2) {
+        ListNode listNode1 = l1;
+        ListNode listNode2 = l2;
+
+        return null;
     }
 }
