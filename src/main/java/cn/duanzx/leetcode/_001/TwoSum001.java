@@ -1,4 +1,4 @@
-package cn.duanzx.leetcode;
+package cn.duanzx.leetcode._001;
 
 
 import org.junit.jupiter.api.Test;

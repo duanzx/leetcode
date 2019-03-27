@@ -12,7 +12,7 @@
 | 4   | [寻找两个有序数组的中位数][013]                  
 
 
-[001]: https://github.com/Blankj/awesome-java-leetcode/blob/master/note/001/README.md
+[001]: https://github.com/d/awesome-java-leetcode/blob/master/note/001/README.md
 [007]: https://github.com/Blankj/awesome-java-leetcode/blob/master/note/007/README.md
 [009]: https://github.com/Blankj/awesome-java-leetcode/blob/master/note/009/README.md
 [013]: https://github.com/Blankj/awesome-java-leetcode/blob/master/note/013/README.md
