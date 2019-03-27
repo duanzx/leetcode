@@ -1,7 +1,7 @@
 package cn.duanzx.leetcode;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AddTwoNumbers002 {
     /**
