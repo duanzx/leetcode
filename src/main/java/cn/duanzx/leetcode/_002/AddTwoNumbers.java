@@ -41,8 +41,8 @@ public class AddTwoNumbers {
         ListNode l23 = new ListNode(4);
         l2.next = l22;
         l22.next = l23;
-//     ListNode listNode =    addTwoNumbers(l1,l2);
-        ListNode listNode = addTwoNumbers(new ListNode(5), new ListNode(5));
+        ListNode listNode = addTwoNumbers1(l1, l2);
+//        ListNode listNode = addTwoNumbers(new ListNode(5), new ListNode(5));
         System.out.println(listNode);
     }
 
@@ -70,9 +70,8 @@ public class AddTwoNumbers {
             s3.append(carry);
         }
         ListNode head = new ListNode(0);
-        ListNode nextNode = new ListNode(Integer.parseInt(s3.substring(0, 1)));
-        head.next = nextNode;
-        for (int i = 1; i < s3.length(); i++) {
+        ListNode nextNode = head;
+        for (int i = 0; i < s3.length(); i++) {
             ListNode tmp = new ListNode(Integer.parseInt(s3.substring(i, i + 1)));
             nextNode.next = tmp;
             nextNode = tmp;
@@ -93,7 +92,23 @@ public class AddTwoNumbers {
     public ListNode addTwoNumbers1(ListNode l1, ListNode l2) {
         ListNode listNode1 = l1;
         ListNode listNode2 = l2;
-
-        return null;
+        ListNode head = new ListNode(0);
+        ListNode listNode3 = head;
+        int carry = 0;
+        while (listNode1 != null || listNode2 != null) {
+            int a = listNode1 == null ? 0 : listNode1.val;
+            int b = listNode2 == null ? 0 : listNode2.val;
+            int sum = a + b + carry;
+            int c = sum % 10;
+            carry = sum / 10;
+            listNode1 = null == listNode1 ? null : listNode1.next;
+            listNode2 = null == listNode2 ? null : listNode2.next;
+            listNode3.next = new ListNode(c);
+            listNode3 = listNode3.next;
+        }
+        if (carry > 0) {
+            listNode3.next = new ListNode(carry);
+        }
+        return head.next;
     }
 }

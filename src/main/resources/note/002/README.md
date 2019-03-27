@@ -50,9 +50,8 @@ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
             s3.append(carry);
         }
         ListNode head = new ListNode(0);
-        ListNode nextNode = new ListNode(Integer.parseInt(s3.substring(0,1)));
-        head.next = nextNode;
-        for (int i = 1; i < s3.length(); i++) {
+        ListNode nextNode = head;
+        for (int i = 0; i < s3.length(); i++) {
             ListNode tmp = new ListNode(Integer.parseInt(s3.substring(i,i+1)));
             nextNode.next = tmp;
             nextNode = tmp;
@@ -71,6 +70,30 @@ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 ```
 ## 思路 2
     上面的思路是先将数字从链表里全部取出来后再进行计算，其实也可以在链表取出的时候进行计算
+```
+public ListNode addTwoNumbers1(ListNode l1, ListNode l2) {
+        ListNode listNode1 = l1;
+        ListNode listNode2 = l2;
+        ListNode head = new ListNode(0);
+        ListNode listNode3 = head;
+        int carry = 0;
+        while (listNode1 != null || listNode2 != null) {
+            int a = listNode1 == null ? 0 : listNode1.val;
+            int b = listNode2 == null ? 0 : listNode2.val;
+            int sum = a + b + carry;
+            int c = sum % 10;
+            carry = sum / 10;
+            listNode1 = null == listNode1 ? null : listNode1.next;
+            listNode2 = null == listNode2 ? null : listNode2.next;
+            listNode3.next = new ListNode(c);
+            listNode3 = listNode3.next;
+        }
+        if (carry > 0) {
+            listNode3.next = new ListNode(carry);
+        }
+        return head.next;
+    }
+```
         
         
         
