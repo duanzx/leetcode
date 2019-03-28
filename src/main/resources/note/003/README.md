@@ -64,7 +64,7 @@
    <div align="center">
     <img src="./image_2.png" width = "600" height = "600" alt="图片名称" align=center />
 </div>
-	5.所以在一个字符遍历查找结束后，只要记住最后结束的字符的角标，然后在下一次比较的时候之间和该角标+1的元素比较就好了
+	5.所以在一个字符遍历查找结束后，只要记住最后结束的字符的角标，然后在下一次比较的时候直接和该角标+1的元素比较就好了
 
 ```
 public int lengthOfLongestSubstring(String s) {
@@ -93,3 +93,15 @@ public int lengthOfLongestSubstring(String s) {
         return maxLength;
     }
 ```
+## 思路 3
+    1.对于字符串 pwwkew 直观上一眼就看出它的最长不重复子字符串是wke,并且长度是3
+    2.设想一下，如果我们能够知道这个字符串的起始角标位置和最后的角标位置，那么就可以计算字符串长度了
+    3.在pwwkew里，wke，起始角标是2 ，最后的角标位置是4， 长度就是：4-2+1=3
+    4.如果我们能够知道每个元素对应的角标，并且假设字符串里没有重复字符，此时
+    startIndex = [0] , endIndex = s.length()-1
+    5.如果只含有一个重复的元素，abcdbefgh , 只时候就有两个最长的子字符串了，abcd 和cdbefgh
+    此时对于abcd ， startIndex = 0 , endIndex = 3 ， 对于cdbefgh , startIndex = 2(重复元素b的角标后一位) , endIndex = 8 。
+<div align="center">
+    <img src="./image_3.png" width = "600" height = "600" alt="图片名称" align=center />
+</div>
+    
