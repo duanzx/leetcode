@@ -30,25 +30,10 @@
         .
         b->bb((通过比较发现b字符重复，所以结束当前循环，子字符串为b,长度为1))
 <div align="center">
-    <img src="./image_1.png" width = "300" height = "200" alt="图片名称" align=center />
+    <img src="./image_1.png" width = "600" height = "600" alt="图片名称" align=center />
 </div>
 
-| - | - | - | -| -| -| 
-| ------ | ------ |  ------ |------ |------ |------ |
-| a | b | c | a | b | c | c | c |
-| 稍微长一点的文本 | 短文本 | 中等文本 |
-
-
-         a  b  c  a  b  c  b  b 
-            a->b->c->a
-               b->c->a->b
-                  c->a->b->c
-                     a->b->c->a
-                        b->c->b
-                           c->b->b
-                              b->b
-                                 b
- ```$xslt
+ ```
  public int lengthOfLongestSubstring(String s) {
         if (null == s) {
             return 0;
@@ -76,13 +61,11 @@
     2.在abcabcbb中，从a开始查找后发现最长的字符串为abc，此时已经明确了abc里没有重复的字符串
     3.然后在以b开始查找的时候就可以跳过对c字符的判断，只需要判断c后面的abcbb即可，最终得到字符串为bca
     4.然后以c开始查找的时候同样可以跳过对a字符的判断。如下图所示：
-    a  b  c  a  b  c  b  b 
-    a->b->c->a
-       b-[]->a->b
-          c->[]->b->c
-             a->[]->c->a
-                b->[]->b
-                   c->b->b
-                      b->b
-                         b
-         ``````````
+   <div align="center">
+    <img src="./image_2.png" width = "600" height = "600" alt="图片名称" align=center />
+</div>
+	5.只要在一个字符遍历查找结束后，记住最后结束的字符的角标，然后在下一次比较的时候之间和该角标+1的元素比较就好了
+
+```java
+
+```
