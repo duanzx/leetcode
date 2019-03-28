@@ -3,15 +3,13 @@ package cn.duanzx.leetcode._003;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class LengthOfLongestSubstring {
 
     @Test
     public void test() {
-        System.out.println(lengthOfLongestSubstring3("abcaefagh12345"));
+        System.out.println(lengthOfLongestSubstring2("abcaefagh12345"));
     }
 
     public int lengthOfLongestSubstring(String s) {
@@ -36,31 +34,7 @@ public class LengthOfLongestSubstring {
         return maxLength;
     }
 
-    public int lengthOfLongestSubstring3(String s) {
-        if (null == s || s.isEmpty()) {
-            return 0;
-        }
-        if (s.length() == 1) {
-            return 1;
-        }
-        Map<Character, Integer> map = new HashMap<Character, Integer>();
-        int i = 0, j = 0;
-        int n = s.length();
-        int max = 0;
-        while (i < n && j < n) {
-            if (!map.containsKey(s.charAt(j)) || i > map.get(s.charAt(j))) {
-                map.put(s.charAt(j), j);
-                max = Math.max(max, j - i + 1);
-                j++;
-            } else {
-                i = map.get(s.charAt(j)) + 1;
-            }
-        }
-        return max;
-    }
-
     public int lengthOfLongestSubstring1(String s) {
-        s = "anviaj";
         if (null == s) {
             return 0;
         }
@@ -87,7 +61,27 @@ public class LengthOfLongestSubstring {
     }
 
     public int lengthOfLongestSubstring2(String s) {
-        Set<Character> set = new HashSet<Character>();
-        return 2;
+        if (null == s) {
+            return 0;
+        }
+        if (s.length() == 0 || s.length() == 1) {
+            return s.length();
+        }
+        s = "abcabcbb";
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
+        int startIndex = 0;
+        int maxLength = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char cs = s.charAt(i);
+            //abcabc -> bca
+            if (!map.containsKey(cs) || startIndex > map.get(cs)) {
+                map.put(cs, i);
+                maxLength = Math.max(maxLength, i - startIndex + 1);
+            }
+            startIndex = map.get(cs) + 1;
+            map.put(cs, i);
+        }
+        return maxLength;
     }
+
 }
