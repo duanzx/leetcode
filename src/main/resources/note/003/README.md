@@ -104,4 +104,30 @@ public int lengthOfLongestSubstring(String s) {
 <div align="center">
     <img src="./image_3.png" width = "600" height = "600" alt="图片名称" align=center />
 </div>
+
+```
+ public int lengthOfLongestSubstring(String s) {
+        if (null == s) {
+            return 0;
+        }
+        if (s.length() == 0 || s.length() == 1) {
+            return s.length();
+        }
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
+        int startIndex = 0;
+        int maxLength = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char cs = s.charAt(i);
+            //abcabc -> bca
+            if (!map.containsKey(cs) || startIndex > map.get(cs)) {
+                map.put(cs, i);
+                maxLength = Math.max(maxLength, i - startIndex + 1);
+                continue;
+            }
+            startIndex = map.get(cs) + 1;
+            map.put(cs, i);
+        }
+        return maxLength;
+    }
+```
     

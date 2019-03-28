@@ -67,7 +67,7 @@ public class LengthOfLongestSubstring {
         if (s.length() == 0 || s.length() == 1) {
             return s.length();
         }
-        s = "abcabcbb";
+        s = "tmmzuxt";
         Map<Character, Integer> map = new HashMap<Character, Integer>();
         int startIndex = 0;
         int maxLength = 0;
@@ -77,6 +77,7 @@ public class LengthOfLongestSubstring {
             if (!map.containsKey(cs) || startIndex > map.get(cs)) {
                 map.put(cs, i);
                 maxLength = Math.max(maxLength, i - startIndex + 1);
+                continue;
             }
             startIndex = map.get(cs) + 1;
             map.put(cs, i);
