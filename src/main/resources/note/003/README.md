@@ -64,8 +64,32 @@
    <div align="center">
     <img src="./image_2.png" width = "600" height = "600" alt="图片名称" align=center />
 </div>
-	5.只要在一个字符遍历查找结束后，记住最后结束的字符的角标，然后在下一次比较的时候之间和该角标+1的元素比较就好了
+	5.所以在一个字符遍历查找结束后，只要记住最后结束的字符的角标，然后在下一次比较的时候之间和该角标+1的元素比较就好了
 
-```java
-
+```
+public int lengthOfLongestSubstring(String s) {
+       if (null == s) {
+            return 0;
+        }
+        if (s.length() == 0 || s.length() == 1) {
+            return s.length();
+        }
+        int maxLength = 0;
+        int lastIndex = -1;
+        for (int i = 0; i < s.length(); i++) {
+            int j = (lastIndex > 0 && lastIndex > i) ? lastIndex + 1 : i + 1;
+            String substring = s.substring(i, j);
+            while (j < s.length()) {
+                String next = s.substring(j, j + 1);
+                if (substring.indexOf(next) != -1) {
+                    break;
+                }
+                lastIndex = j;
+                substring += next;
+                j++;
+            }
+            maxLength = Math.max(maxLength,substring.length());
+        }
+        return maxLength;
+    }
 ```
