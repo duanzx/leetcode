@@ -16,3 +16,63 @@
 解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
      请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
 ```
+## 思路 1 
+    1.声明一个临时字符串变量，用于存放子字符串
+    2.从字符串的第1个字符开始，判断字符串里是否包含该字符，如果不包含就在子字符串后面追加该字符，
+    如果包含，说明字符串里已经有该字符，此时结束当前的循环。然后从下个位置的字符串开始继续查找。
+    假设目标字符串为abcabcbb：
+        a-> ab ->abc ->abca (通过比较发现a字符重复，所以结束当前循环，子字符串为abc,长度为3
+        b->bc ->bca->bcab(通过比较发现b字符重复，所以结束当前循环，子字符串为bca,长度为3)
+        c->ca ->cab->cabc(通过比较发现c字符重复，所以结束当前循环，子字符串为cab,长度为3)
+        a->ab ->abc->abcb(通过比较发现b字符重复，所以结束当前循环，子字符串为abc,长度为3)
+        .
+        .
+        .
+        b->bb((通过比较发现b字符重复，所以结束当前循环，子字符串为b,长度为1))
+         a  b  c  a  b  c  b  b 
+            a->b->c->a
+               b->c->a->b
+                  c->a->b->c
+                     a->b->c->a
+                        b->c->b
+                           c->b->b
+                              b->b
+                                 b
+ ```$xslt
+ public int lengthOfLongestSubstring(String s) {
+        if (null == s) {
+            return 0;
+        }
+        if (s.length() == 0 || s.length() == 1) {
+            return s.length();
+        }
+        int maxLength = 0;
+        for (int i = 0; i < s.length(); i++) {
+            String substring = s.substring(i, i + 1);
+            for (int j = i + 1; j < s.length(); j++) {
+                String next = s.substring(j, j + 1);
+                if (substring.indexOf(next) != -1) {
+                    break;
+                }
+                substring += next;
+            }
+            maxLength = Math.max(substring.length(),maxLength);
+        }
+        return maxLength;
+    }
+```
+## 思路 2
+    1.通过执行思路1的方法后，我们发现代码里有很多不必要的计算
+    2.在abcabcbb中，从a开始查找后发现最长的字符串为abc，此时已经明确了abc里没有重复的字符串
+    3.然后在以b开始查找的时候就可以跳过对c字符的判断，只需要判断c后面的abcbb即可，最终得到字符串为bca
+    4.然后以c开始查找的时候同样可以跳过对a字符的判断。如下图所示：
+    a  b  c  a  b  c  b  b 
+    a->b->c->a
+       b-[]->a->b
+          c->[]->b->c
+             a->[]->c->a
+                b->[]->b
+                   c->b->b
+                      b->b
+                         b
+         
