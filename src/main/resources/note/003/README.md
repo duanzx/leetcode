@@ -18,8 +18,8 @@
 ```
 ## 思路 1 
     1.声明一个临时字符串变量，用于存放子字符串
-    2.从字符串的第1个字符开始，判断字符串里是否包含该字符，如果不包含就在子字符串后面追加该字符，
-    如果包含，说明字符串里已经有该字符，此时结束当前的循环。然后从下个位置的字符串开始继续查找。
+    2.从字符串的第1个字符开始，判断子字符串里是否包含该字符，如果不包含就在子字符串后面追加该字符，
+    如果包含，说明子字符串里已经有该字符，此时结束当前的循环。然后从下个位置的字符串开始继续查找。
     假设目标字符串为abcabcbb：
         a-> ab ->abc ->abca (通过比较发现a字符重复，所以结束当前循环，子字符串为abc,长度为3
         b->bc ->bca->bcab(通过比较发现b字符重复，所以结束当前循环，子字符串为bca,长度为3)
@@ -99,7 +99,7 @@ public int lengthOfLongestSubstring(String s) {
     3.在pwwkew里，wke，起始角标是2 ，最后的角标位置是4， 长度就是：4-2+1=3
     4.如果我们能够知道每个元素对应的角标，并且假设字符串里没有重复字符，此时
     startIndex = [0] , endIndex = s.length()-1
-    5.如果只含有一个重复的元素，abcdbefgh , 只时候就有两个最长的子字符串了，abcd 和cdbefgh
+    5.如果只含有一个重复的元素，abcdbefgh , 这时候就有两个最长的子字符串了，abcd 和cdbefgh
     此时对于abcd ， startIndex = 0 , endIndex = 3 ， 对于cdbefgh , startIndex = 2(重复元素b的角标后一位) , endIndex = 8 。
 <div align="center">
     <img src="./image_3.png" width = "600" height = "600" alt="图片名称" align=center />
