@@ -111,11 +111,12 @@ public int lengthOfLongestSubstring(String s) {
         a.首先维护一个Map<Character,Integer>用来存储字符串里每个字符的角标，startIndex代表不重复的字符串的开始位置，
         初始值是0
         b.如果当前元素在Map里没有，就将当前的元素的角标放入Map里
-        c.如果当前元素已存在Map里，说明当前字符是重复的元素，此时可以得到不重复的字符串[0,index1-1]
-        d.然后从Map里获取的重复的元素的位置i,从i的下一个位置(startIndex = i+1)开始再次查找
-        d.然后从index1位置起（startIndex = index1）开始在字符串[index1,s.length()-1]里查找不重复的字符串
-        e.如果在index2位置查找到重复的元素，并且Map里存储的元素的位置包含在[index1,s.length()-1]里面
-        说明在[index1,s.length()-1]里查询到了重复的元素,此时得到不重复的字符串[index1,index2-1]
+        c.如果当前元素已存在Map里，说明当前字符是重复的元素，此时可以得到不重复的字符串[0,index1-1],假设当前字符位置是
+        index1
+        d.然后从Map里获取的重复的元素的位置i,从i的下一个位置开始再次查找[startIndex,s.length()-1]，此时startIndex = i+1
+        e.如果在index2位置查找到重复的元素，并且Map里存储的重复元素位置包含在[startIndex,s.length()-1]里面
+        此时得到不重复字符串[startIndex,index2-1]
+        f.以此类推，重复上述判断操作，知道循环结束。
         
 ***
 <div align="center">
@@ -123,29 +124,29 @@ public int lengthOfLongestSubstring(String s) {
 </div>
 
 ```
- public int lengthOfLongestSubstring(String s) {
-        if (null == s) {
-            return 0;
-        }
-        if (s.length() == 0 || s.length() == 1) {
-            return s.length();
-        }
-        Map<Character, Integer> map = new HashMap<Character, Integer>();
-        int startIndex = 0;
-        int maxLength = 0;
-        for (int i = 0; i < s.length(); i++) {
-            char cs = s.charAt(i);
-            //abcabc -> bca
-            if (!map.containsKey(cs) || startIndex > map.get(cs)) {
-                map.put(cs, i);
-                maxLength = Math.max(maxLength, i - startIndex + 1);
-                continue;
-            }
-            startIndex = map.get(cs) + 1;
-            map.put(cs, i);
-        }
-        return maxLength;
-    }
+  public int lengthOfLongestSubstring(String s) {
+         if (null == s) {
+             return 0;
+         }
+         if (s.length() == 0 || s.length() == 1) {
+             return s.length();
+         }
+         Map<Character, Integer> map = new HashMap<Character, Integer>();
+         int startIndex = 0;
+         int maxLength = 0;
+         for (int i = 0; i < s.length(); i++) {
+             char mkey = s.charAt(i);
+             int mindex = map.containsKey(mkey)?map.get(mkey):-1;
+             if(mindex < 0 || startIndex > mindex){
+                 map.put(mkey,i);
+                 maxLength = Math.max(maxLength, i - startIndex + 1);
+                 continue;
+             }
+             startIndex = mindex+1;
+            map.put(mkey,i);
+         }
+         return maxLength;
+     }
 ```
 ## 思路 3
     1.利用滑动窗口算法

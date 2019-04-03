@@ -85,4 +85,28 @@ public class LengthOfLongestSubstring {
         return maxLength;
     }
 
+    public int lengthOfLongestSubstring3(String s) {
+        if (null == s) {
+            return 0;
+        }
+        if (s.length() == 0 || s.length() == 1) {
+            return s.length();
+        }
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
+        int startIndex = 0;
+        int maxLength = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char mkey = s.charAt(i);
+            int mindex = map.containsKey(mkey) ? map.get(mkey) : -1;
+            if (mindex < 0 || startIndex > mindex) {
+                map.put(mkey, i);
+                maxLength = Math.max(maxLength, i - startIndex + 1);
+                continue;
+            }
+            startIndex = mindex + 1;
+            map.put(mkey, i);
+        }
+        return maxLength;
+    }
+
 }
