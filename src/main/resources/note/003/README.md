@@ -165,7 +165,6 @@ public int lengthOfLongestSubstring(String s) {
         if (s.length() == 0 || s.length() == 1) {
             return s.length();
         }
-        s = "abcabcbb";
         int i = 0, j = 0;
         int maxLength = 0;
         Set<Character> set = new HashSet<Character>();

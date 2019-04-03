@@ -118,7 +118,6 @@ public class LengthOfLongestSubstring {
         if (s.length() == 0 || s.length() == 1) {
             return s.length();
         }
-        s = "abcabcbb";
         int i = 0, j = 0;
         int maxLength = 0;
         Set<Character> set = new HashSet<Character>();
@@ -136,4 +135,27 @@ public class LengthOfLongestSubstring {
         return maxLength;
     }
 
+    public int lengthOfLongestSubstring5(String s) {
+        if (null == s) {
+            return 0;
+        }
+        if (s.length() == 0 || s.length() == 1) {
+            return s.length();
+        }
+        int maxLength = 0;
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
+        int i = 0, j = 0;
+        while (i < s.length() && j < s.length()) {
+            Character cs = s.charAt(j);
+            if (!map.containsKey(cs)) {
+                map.put(cs, j);
+                maxLength = Math.max(maxLength, j - i + 1);
+                j++;
+            } else {
+                i = map.get(cs) + 1;
+                map.put(cs, j);
+            }
+        }
+        return maxLength;
+    }
 }
