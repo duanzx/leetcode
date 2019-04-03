@@ -104,10 +104,8 @@ public int lengthOfLongestSubstring(String s) {
     3.比如在pwwkew里，最长不重复子串是：wke，其起始角标是2 ，最后的角标位置是4， 长度就是：4-2+1=3
     4.如果我们能够知道每个元素对应的角标，并且假设字符串里没有重复字符，比如字符串abcde,此时有
     startIndex = [0] , endIndex = s.length()-1
-    5.如果只含有一个重复的元素，abcdbefgh , 这时候就有两个最长的子字符串了，abcd 和cdbefgh
-        对于abcd ， startIndex = 0 , endIndex = 3 ， 
-        对于cdbefgh , startIndex = 2(重复元素b的角标后一位) , endIndex = 8 。
-    6.如果是含有多个重复的元素，只要知道不重复元素的开始角标，和最后一个不重复的元素的角标，也是可以计算长度的。
+    5.如果只含有一个重复的元素，abcdbefgh , 这时候重复字符是b,可以得到两个不含有b的字符串，ab 和cdbefgh
+    6.如果是含有多个重复的元素：
         a.首先维护一个Map<Character,Integer>用来存储字符串里每个字符的角标，startIndex代表不重复的字符串的开始位置，
         初始值是0
         b.如果当前元素在Map里没有，就将当前的元素的角标放入Map里
@@ -116,7 +114,7 @@ public int lengthOfLongestSubstring(String s) {
         d.然后从Map里获取的重复的元素的位置i,从i的下一个位置开始再次查找[startIndex,s.length()-1]，此时startIndex = i+1
         e.如果在index2位置查找到重复的元素，并且Map里存储的重复元素位置包含在[startIndex,s.length()-1]里面
         此时得到不重复字符串[startIndex,index2-1]
-        f.以此类推，重复上述判断操作，知道循环结束。
+        f.以此类推，重复上述判断操作，直到循环结束。
         
 ***
 <div align="center">
