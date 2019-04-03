@@ -183,3 +183,29 @@ public int lengthOfLongestSubstring(String s) {
     }
     
 ```
+
+```
+public int lengthOfLongestSubstring5(String s) {
+        if (null == s) {
+            return 0;
+        }
+        if (s.length() == 0 || s.length() == 1) {
+            return s.length();
+        }
+        int maxLength = 0;
+        Map<Character,Integer> map = new HashMap<Character, Integer>();
+        int i=0,j=0;
+        while (i < s.length() && j < s.length()){
+            Character cs = s.charAt(j);
+            if(!map.containsKey(cs)){
+                map.put(cs,j);
+                maxLength = Math.max(maxLength, j - i + 1);
+                j++;
+            }else{
+                map.remove(s.charAt(i));
+                i++;
+            }
+        }
+        return maxLength;
+    }
+```
