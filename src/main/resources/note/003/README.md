@@ -147,4 +147,40 @@ public int lengthOfLongestSubstring(String s) {
      }
 ```
 ## 思路 3
-    1.利用滑动窗口算法
+    1.利用滑动窗口算法，把目标字符串看做是窗口，把不重复子串看做是不断滑动的窗框，随着startIndex,endIndex
+    不断变化而滑动。
+    2.对于endIndex，它的变化是从0到s.length()-1
+    3.对于startIndex，它的变化是随着重复元素的出现而变化
+    当没有重复元素时starIndex是0，当遇到重复元素时候，startIndex就是之前的重复元素的位置+1
+    4.用HashSet存储遍历到的每个字符，判断该字符是否在Set里面，如果不在就加入Set里面。
+    5.如果已存在，就删掉已存在的元素
+    6.对于abcababb ,在遍历到abca的时候要把首字符a从Set里删掉，这样startIndex = 0+1;在遍历到abcab的时候
+    ，把b删掉，startIndex = 1+1;保证Set里存储的都是不重复的连续字符
+
+```
+ public int lengthOfLongestSubstring4(String s) {
+        if (null == s) {
+            return 0;
+        }
+        if (s.length() == 0 || s.length() == 1) {
+            return s.length();
+        }
+        s = "abcabcbb";
+        int i = 0, j = 0;
+        int maxLength = 0;
+        Set<Character> set = new HashSet<Character>();
+        while (i < s.length() && j < s.length()) {
+            Character cs = s.charAt(j);
+            if (!set.contains(cs)) {
+                set.add(cs);
+                maxLength = Math.max(maxLength, j - i + 1);
+                j++;
+            } else {
+                set.remove(s.charAt(i));
+                i++;
+            }
+        }
+        return maxLength;
+    }
+    
+```

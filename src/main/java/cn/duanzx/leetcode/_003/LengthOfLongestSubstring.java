@@ -3,13 +3,15 @@ package cn.duanzx.leetcode._003;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class LengthOfLongestSubstring {
 
     @Test
     public void test() {
-        System.out.println(lengthOfLongestSubstring2("abcaefagh12345"));
+        System.out.println(lengthOfLongestSubstring4("abcaefagh12345"));
     }
 
     public int lengthOfLongestSubstring(String s) {
@@ -105,6 +107,31 @@ public class LengthOfLongestSubstring {
             }
             startIndex = mindex + 1;
             map.put(mkey, i);
+        }
+        return maxLength;
+    }
+
+    public int lengthOfLongestSubstring4(String s) {
+        if (null == s) {
+            return 0;
+        }
+        if (s.length() == 0 || s.length() == 1) {
+            return s.length();
+        }
+        s = "abcabcbb";
+        int i = 0, j = 0;
+        int maxLength = 0;
+        Set<Character> set = new HashSet<Character>();
+        while (i < s.length() && j < s.length()) {
+            Character cs = s.charAt(j);
+            if (!set.contains(cs)) {
+                set.add(cs);
+                maxLength = Math.max(maxLength, j - i + 1);
+                j++;
+            } else {
+                set.remove(s.charAt(i));
+                i++;
+            }
         }
         return maxLength;
     }
