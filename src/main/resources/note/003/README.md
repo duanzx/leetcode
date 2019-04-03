@@ -100,12 +100,24 @@ public int lengthOfLongestSubstring(String s) {
 ```
 ## 思路 3
     1.对于字符串 pwwkew 直观上一眼就看出它的最长不重复子字符串是wke,并且长度是3
-    2.设想一下，如果我们能够知道这个字符串的起始角标位置和最后的角标位置，那么就可以计算字符串长度了
-    3.在pwwkew里，wke，起始角标是2 ，最后的角标位置是4， 长度就是：4-2+1=3
-    4.如果我们能够知道每个元素对应的角标，并且假设字符串里没有重复字符，此时
+    2.如果我们能够知道这个字符串的起始角标位置和最后的角标位置，是不是可以计算字符串的长度呢？
+    3.比如在pwwkew里，最长不重复子串是：wke，其起始角标是2 ，最后的角标位置是4， 长度就是：4-2+1=3
+    4.如果我们能够知道每个元素对应的角标，并且假设字符串里没有重复字符，比如字符串abcde,此时有
     startIndex = [0] , endIndex = s.length()-1
     5.如果只含有一个重复的元素，abcdbefgh , 这时候就有两个最长的子字符串了，abcd 和cdbefgh
-    此时对于abcd ， startIndex = 0 , endIndex = 3 ， 对于cdbefgh , startIndex = 2(重复元素b的角标后一位) , endIndex = 8 。
+        对于abcd ， startIndex = 0 , endIndex = 3 ， 
+        对于cdbefgh , startIndex = 2(重复元素b的角标后一位) , endIndex = 8 。
+    6.如果是含有多个重复的元素，只要知道不重复元素的开始角标，和最后一个不重复的元素的角标，也是可以计算长度的。
+        a.首先维护一个Map<Character,Integer>用来存储字符串里每个字符的角标，startIndex代表不重复的字符串的开始位置，
+        初始值是0
+        b.如果当前元素在Map里没有，就将当前的元素的角标放入Map里
+        c.如果当前元素已存在Map里，说明当前字符是重复的元素，此时可以得到不重复的字符串[0,index1-1]
+        d.然后从Map里获取的重复的元素的位置i,从i的下一个位置(startIndex = i+1)开始再次查找
+        d.然后从index1位置起（startIndex = index1）开始在字符串[index1,s.length()-1]里查找不重复的字符串
+        e.如果在index2位置查找到重复的元素，并且Map里存储的元素的位置包含在[index1,s.length()-1]里面
+        说明在[index1,s.length()-1]里查询到了重复的元素,此时得到不重复的字符串[index1,index2-1]
+        
+***
 <div align="center">
     <img src="./image_3.png" width = "600" height = "600" alt="图片名称" align=center />
 </div>
