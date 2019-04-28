@@ -1,6 +1,7 @@
 package cn.duanzx.leetcode._004;
 
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 
 public class FindMedianSortedArrays {
     /**
