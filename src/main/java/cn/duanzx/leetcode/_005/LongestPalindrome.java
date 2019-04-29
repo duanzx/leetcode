@@ -2,9 +2,6 @@ package cn.duanzx.leetcode._005;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LongestPalindrome {
     /**
      * 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
@@ -31,11 +28,19 @@ public class LongestPalindrome {
         System.out.println(longestPalindrome("babad"));
     }
 
-    /**
-     * 分而治之
-     * */
-
     public String longestPalindrome(String s) {
+        String substring = "";
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = i; j < s.length(); j++) {
+                if (checkLP(s, i, j)) {
+                    substring = substring.length() > (j - i + 1) ? substring : s.substring(i, j + 1);
+                }
+            }
+        }
+        return substring;
+    }
+
+    public String longestPalindrome1(String s) {
         String substring = "";
         int[] indexArr = new int[s.length()];
         for (int i = 0; i < s.length(); i++) {
