@@ -31,7 +31,7 @@ public class LongestPalindrome {
     public String longestPalindrome(String s) {
         String substring = "";
         for (int i = 0; i < s.length(); i++) {
-            for (int j = i; j < s.length(); j++) {
+            for (int j = s.length() - 1; j >= i; j--) {
                 if (checkLP(s, i, j)) {
                     substring = substring.length() > (j - i + 1) ? substring : s.substring(i, j + 1);
                 }
