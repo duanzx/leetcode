@@ -32,6 +32,7 @@
             for (int j = s.length() - 1; j >= i; j--) {
                 if(checkLP(s,i,j)){
                     substring = substring.length() > (j-i+1)?substring:s.substring(i,j+1);
+                    break;
                 }
             }
         }
