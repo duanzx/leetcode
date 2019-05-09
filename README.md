@@ -11,6 +11,7 @@
 | 3    | [无重复字符的最长子串][003]                 
 | 4   | [寻找两个有序数组的中位数][004]
 | 5   | [最长回文子串][005]                  
+| 6   | [Z 字形变换][006]                  
 
 [duanzx]: https://github.com/duanzx/leetcode
 [001]: https://github.com/duanzx/leetcode/blob/master/src/main/resources/note/001/README.md
@@ -18,4 +19,5 @@
 [003]: https://github.com/duanzx/leetcode/blob/master/src/main/resources/note/003/README.md
 [004]: https://github.com/duanzx/leetcode/blob/master/src/main/resources/note/004/README.md
 [005]: https://github.com/duanzx/leetcode/blob/master/src/main/resources/note/005/README.md
+[006]: https://github.com/duanzx/leetcode/blob/master/src/main/resources/note/006/README.md
 
