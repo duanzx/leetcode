@@ -146,15 +146,39 @@ public class ZConvert {
     }
 
     /**
-     * 方法一：按行排序 todo
-     * 通过从左向右迭代字符串，我们可以轻松
+     * 方法一：按行排序
+     * 通过从左向右迭代字符串，我们可以轻松地确定字符位与Z字形图案中的哪一行
+     * 使用min(numRows,len(s))表示Z字形图案中的非空行
+     * 从左到右迭代，将每个字符添加到合适的行
+     * 使用当前行和当前方向这两个变量对合适的行进行跟踪
+     * 只有向上移动到最上面或向下移动到最下面的行时候，当前方向才会发生改变
      **/
     public String convert2(String s, int numRows) {
-        return null;
+        if (null == s || numRows < 2) {
+            return s;
+        }
+        List<StringBuilder> rows = new ArrayList<StringBuilder>();
+        for (int i = 0; i < Math.min(numRows, s.length()); i++) {
+            rows.add(new StringBuilder());
+        }
+        int currentRow = 0;
+        boolean goingDown = false;
+        for (char c : s.toCharArray()) {
+            rows.get(currentRow).append(c);
+            if (currentRow == 0 || currentRow == numRows - 1) {
+                goingDown = !goingDown;
+            }
+            currentRow += goingDown ? 1 : -1;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        for (StringBuilder sb : rows) {
+            stringBuilder.append(sb);
+        }
+        return stringBuilder.toString();
     }
 
     /**
-     * 方法二：按行访问 todo
+     * 方法二：按行访问
      * 通过从左向右迭代字符串，我们可以轻松
      **/
     public String convert3(String s, int numRows) {

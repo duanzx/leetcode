@@ -132,6 +132,35 @@ public String convert1(String s, int numRows) {
         return str.toString();
     }
 ```
-## 思路 2
+## 思路2 按照行排序
+    1.由于Z形字符串的排列规律是，先向下排列字符，在到达最后一行后，开始向上排列字符，在到达第一行后再向下排列
+    2.因此只要我们维护两个变量：当前字符所在的行，当前字符排列的方向
+    3.只有向上移动到最上面或向下移动到最下面的行时候，当前方向才会发生改变
+    
  ```
+ public String convert2(String s, int numRows) {
+         if(null == s || numRows < 2){
+             return s;
+         }
+         List<StringBuilder> rows = new ArrayList<StringBuilder>();
+         for(int i = 0;i<Math.min(numRows,s.length());i++){
+             rows.add(new StringBuilder());
+         }
+         int currentRow = 0;
+         boolean goingDown = false;
+         for(char c : s.toCharArray()){
+             rows.get(currentRow).append(c);
+             if(currentRow == 0 || currentRow == numRows-1){
+                 goingDown = !goingDown;
+             }
+             currentRow += goingDown?1:-1;
+         }
+         StringBuilder stringBuilder = new StringBuilder();
+         for(StringBuilder sb : rows){
+             stringBuilder.append(sb);
+         }
+         return stringBuilder.toString();
+     }
  ```
+ ## 思路3 按行访问
+ 
