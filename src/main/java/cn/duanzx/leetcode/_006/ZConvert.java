@@ -63,7 +63,7 @@ public class ZConvert {
 
     @Test
     public void test() {
-        System.out.println(convert1("PAYPALISHIRING", 3));
+        System.out.println(convert3("PAYPALISHIRING", 3));
     }
 
     /**
@@ -179,10 +179,38 @@ public class ZConvert {
 
     /**
      * 方法二：按行访问
-     * 通过从左向右迭代字符串，我们可以轻松
+     * 首先访问 行号0 中的所有字符，接着访问 行号1，行号2。。。中的字符
+     * 行0中的字符位与 k(2⋅numRows−2)
+     * 行 numRows -1 中的字符位与 k(2⋅numRows−2)+numRows -1 处
+     * 当行数为 5 时候：
+     *       1                9                   第一行 等差数列(d=8) 2*5-2
+     *       2            8   10          16      第二行 数列(d=6,d=2)   2 + 2*3 = 8  , 10 + 2*3 = 16
+     *       3        7       11      15          第三行 数列(d=4)       3 + 2*2 = 7   11 + 2*2 = 15
+     *       4    6           12  14              第四行 数列 d=2,d=6    4 + 2 * 1 = 6   12 + 2*2 = 14
+     *       5                13                  第五行 数列 d=8
      **/
     public String convert3(String s, int numRows) {
-        return null;
+        if (null == s || numRows < 2) {
+            return s;
+        }
+        StringBuilder ret = new StringBuilder();
+        int n = s.length();
+        int d = 2 * numRows - 2;
+        for (int i = 0; i < numRows; i++) {
+            int mr = numRows - i;
+            for (int j = 0; i + j < n; j += d) { //每行的首字符为 行号
+                ret.append(s.charAt(i + j));
+                if (i == 0 || i == numRows - 1) {
+                    continue;
+                }
+                int next = i + j + 2 * (mr - 1);
+                if (next < s.length()) {
+                    ret.append(s.charAt(next));
+                }
+            }
+        }
+        return ret.toString();
     }
+//    PAYPALISHIRING
 
 }

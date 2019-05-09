@@ -163,4 +163,34 @@ public String convert1(String s, int numRows) {
      }
  ```
  ## 思路3 按行访问
- 
+    1.首先访问 行号0 中的所有字符，接着访问 行号1，行号2。。。中的字符
+    2.假设有 5 行(d = 2*5 - 2)，Z字符串位置应该如下：
+           0                8                  第一行 等差数列(d=8),相邻两个元素之间相差8个位置
+           1            7   9          15      第二行 1 + 2*(5-2) = 7 , 9 + 2*(5-2) = 15
+           2        6       10      14         第三行 2 + 2*(5-3) = 6   10 + 2*(5-3) = 14
+           3    5           11  13             第四行 3 + 2 * (5-4) = 5   11 + 2*(5-4) = 13
+           4                12                 第五行 等差数列(d=8),相邻两个元素之间相差8个位置
+```$xslt
+public String convert3(String s, int numRows) {
+        if (null == s || numRows < 2) {
+            return s;
+        }
+        StringBuilder ret = new StringBuilder();
+        int n = s.length();
+        int d = 2*numRows-2;
+        for(int i = 0;i<numRows;i++){
+            int mr = numRows-i;
+            for(int j = 0;i+j < n;j+=d){ //每行的首字符为 行号
+                ret.append(s.charAt(i+j));
+                if(i == 0 || i == numRows-1){
+                    continue;
+                }
+                int next = i+j+2*(mr-1);
+                if(next < s.length()){
+                    ret.append(s.charAt(next));
+                }
+            }
+        }
+        return ret.toString();
+    }
+```
