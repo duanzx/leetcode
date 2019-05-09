@@ -144,4 +144,21 @@ public class ZConvert {
         }
         return str.toString();
     }
+
+    /**
+     * 方法一：按行排序 todo
+     * 通过从左向右迭代字符串，我们可以轻松
+     **/
+    public String convert2(String s, int numRows) {
+        return null;
+    }
+
+    /**
+     * 方法二：按行访问 todo
+     * 通过从左向右迭代字符串，我们可以轻松
+     **/
+    public String convert3(String s, int numRows) {
+        return null;
+    }
+
 }
