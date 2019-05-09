@@ -194,11 +194,10 @@ public class ZConvert {
             return s;
         }
         StringBuilder ret = new StringBuilder();
-        int n = s.length();
         int d = 2 * numRows - 2;
         for (int i = 0; i < numRows; i++) {
             int mr = numRows - i;
-            for (int j = 0; i + j < n; j += d) { //每行的首字符为 行号
+            for (int j = 0; i + j < s.length(); j += d) { //每行的首字符为 行号
                 ret.append(s.charAt(i + j));
                 if (i == 0 || i == numRows - 1) {
                     continue;
